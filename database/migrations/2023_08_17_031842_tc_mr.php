@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tc_mr', function (Blueprint $table) {
-            $table->fs_mr()->startingValue(000111);
+            $table->bigInteger('fs_mr');
             $table->string('fs_nama');
             $table->string('fs_tgl_lahir');
             $table->string('fs_jenis_kelamin');

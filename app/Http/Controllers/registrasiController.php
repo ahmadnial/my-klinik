@@ -5,46 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dataSosialCreate;
 
-class HomeController extends Controller
+class registrasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('Pages.index');
-    }
-
-    public function dasos()
-    {
-        $cekid = dataSosialCreate::count();
-        if ($cekid == 0) {
-            $no_mr = 100011;
-        } else {
-            $continue = dataSosialCreate::all()->last();
-            $temp = (int)substr($continue->fs_mr, -6) + 1;
-            $no_mr = $temp;
-        }
-        return view('Pages.data-sosial', ['no_mr' => $no_mr]);
-    }
-
-    public function registrasi()
-    {
-        return view('Pages.registrasi');
-    }
-
-    public function antrian()
-    {
-        return view('Pages.antrian');
-    }
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -54,7 +20,24 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fs_mr' => 'required',
+            'fs_nama' => 'required',
+            'fs_tgl_lahir' => 'required',
+            'fs_jenis_kelamin' => 'required',
+            'fs_alamat' => 'required',
+            'fs_no_hp' => 'required'
+        ]);
+
+        $data = dataSosialCreate::create($request->all());
+
+        if ($data->save()) {
+            toast('Berhasil Tersimpan', 'success')->autoClose(5000);
+            return back();
+        } else {
+            toast('Gagal Tersimpan!', 'error')->autoClose(5000);
+            return back();
+        }
     }
 
     /**

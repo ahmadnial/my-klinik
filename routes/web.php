@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\registrasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/data-sosial', [HomeController::class, 'dasos']);
 Route::get('/registrasi', [HomeController::class, 'registrasi']);
 Route::get('/antrian', [HomeController::class, 'antrian']);
+
+Route::post('/create-dasos', [registrasiController::class, 'store']);

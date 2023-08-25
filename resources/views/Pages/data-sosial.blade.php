@@ -51,41 +51,45 @@
                     </button>
                     <h4 class="modal-title" id="modalLabelLarge">Data Pasien Baru</h4>
                 </div>
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">No. Rekam Medis</label>
-                        <input type="text" class="form-control" name="no_mr" placeholder="Otomatis" readonly>
+                <form action="{{ url('/create-dasos') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">No. Rekam Medis</label>
+                            <input type="text" class="form-control" name="fs_mr" value="{{ $no_mr }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nama</label>
+                            <input type="text" class="form-control" name="fs_nama" placeholder="Nama Pasien">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tanggal Lahir</label>
+                            <input type="date" class="form-control" name="fs_tgl_lahir"
+                                placeholder="Tanggal Lahir Pasien">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Jenis Kelamin</label>
+                            <select name="fs_jenis_kelamin" id="fs_jenis_kelamin" class="form-control">
+                                <option value="Laki-laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Alamat</label>
+                            <textarea type="date" class="form-control" name="fs_alamat"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nomor Telephone</label>
+                            <input type="text" class="form-control" name="fs_no_hp"
+                                placeholder="Nomor Telephone/WA Pasien">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Nama</label>
-                        <input type="text" class="form-control" name="fs_nama" placeholder="Nama Pasien">
+                    <div class="modal-footer">
+                        {{-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> --}}
+                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Save</button>
                     </div>
-                    <div class="form-group">
-                        <label for="">Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="fs_tgl_lahir" placeholder="Tanggal Lahir Pasien">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Jenis Kelamin</label>
-                        <select name="fs_jenis_kelamin" id="fs_jenis_kelamin" class="form-control">
-                            <option value="Laki-laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Alamat</label>
-                        <textarea type="date" class="form-control" name="fs_alamat">Alamat Lengkap Pasien</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nomor Telephone</label>
-                        <input type="text" class="form-control" name="fs_no_tlp" placeholder="Nomor Telephone/WA Pasien">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> --}}
-                    <button type="button" class="btn btn-success"><i class="fa fa-save"></i> &nbsp; Save</button>
-                </div>
             </div>
+            </form>
         </div>
     </div>
 @endsection
