@@ -38,11 +38,11 @@ class HomeController extends Controller
     {
         $data = [];
 
-        $request->filled('q');
-        $data = dataSosialCreate::select("fs_mr", "fs_nama", "fs_alamat")
-            ->where('fs_nama', 'LIKE', '%' . $request->get('q') . '%')
-            ->get();
-
+        if ($request->filled('q')) {
+            $data = dataSosialCreate::select("fs_mr", "fs_nama", "fs_alamat", "fs_tgl_lahir")
+                ->where('fs_nama', 'LIKE', '%' . $request->get('q') . '%')
+                ->get();
+        }
         // dd($data);
 
         return response()->json($data);

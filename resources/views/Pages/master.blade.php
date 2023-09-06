@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href=" {{ asset('src/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
 </head>
 
 <body class="hold-transition skin-purple-light sidebar-mini">
@@ -664,15 +665,8 @@
                 "autoWidth": false
             });
         });
-    </script>
-    {{-- <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $(".form-control-pasien").select2();
-        });
-    </script> --}}
 
-    <script type="text/javascript">
+        // Ajax Search Registrasi
         var path = "{{ route('registrasiSearch') }}";
 
         $('#search').select2({
@@ -680,12 +674,12 @@
             ajax: {
                 url: path,
                 dataType: 'json',
-                delay: 250,
+                delay: 150,
                 processResults: function(data) {
                     return {
                         results: $.map(data, function(item) {
                             return {
-                                text: item.fs_mr + ' - ' + item.fs_nama,
+                                text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
                                 id: item.fs_mr
                             }
                         })

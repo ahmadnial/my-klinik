@@ -40,8 +40,7 @@
     </div>
 
     <!-- The modal -->
-    <div class="modal fade" id="TambahPasien" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge"
-        aria-hidden="true">
+    <div class="modal fade" id="TambahPasien" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content modal-lg">
 
@@ -49,7 +48,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="modalLabelLarge">Data Pasien Baru</h4>
+                    <h4 class="modal-title" id="modalLabelLarge">Registrasi Pasien</h4>
                 </div>
 
                 <div class="modal-body">
