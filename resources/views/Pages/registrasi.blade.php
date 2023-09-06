@@ -55,9 +55,8 @@
                 <div class="modal-body">
                     <div class="form-group col-sm-6">
                         <label for="">Nama Pasien/No. MR</label>
-                        <select class="form-control select2" style="width: 100%;" name="fr_nm_pasien">
-                            {{-- <option selected="selected">Alabama</option> --}}
-                            <option>Alaska</option>
+                        <select class="form-control-pasien" id="search" style="width: 100%;" name="fr_nm_pasien">
+
                         </select>
                     </div>
                     <div class="form-group col-sm-6">
@@ -73,7 +72,7 @@
                     </div>
                     <hr>
                     <hr> <br>
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-sm-6">
                         <label for="">Layanan</label>
                         <select name="fs_jenis_kelamin" id="fr_layanan" class="form-control">
                             <option value="Laki-laki">Layanan</option>
@@ -97,19 +96,19 @@
                     </div>
                     <br>
                     <hr>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
                         <label for="">Berat Badan</label>
                         <input type="text" class="form-control" name="fr_bb" placeholder="Nomor Telephone/WA Pasien">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
                         <label for="">Alergi</label>
                         <input type="text" class="form-control" name="fr_alergi" placeholder="Nomor Telephone/WA Pasien">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
                         <label for="">Alamat</label>
                         <textarea type="date" class="form-control" name="fr_alamat">Alamat Lengkap Pasien</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-12">
                         <label for="">Nomor Telephone</label>
                         <input type="text" class="form-control" name="fr_no_tlp" placeholder="Nomor Telephone/WA Pasien">
                     </div>

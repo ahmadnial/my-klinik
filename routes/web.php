@@ -22,7 +22,12 @@ use App\Http\Controllers\registrasiController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/data-sosial', [HomeController::class, 'dasos']);
-Route::get('/registrasi', [HomeController::class, 'registrasi']);
 Route::get('/antrian', [HomeController::class, 'antrian']);
+Route::controller(HomeController::class)->group(function () {
+    Route::get('registrasi', 'registrasi');
+    Route::get('registrasiSearch', 'registrasiSearch')->name('registrasiSearch');
+});
 
 Route::post('/create-dasos', [registrasiController::class, 'store']);
+
+Route::get('/registrasi', [HomeController::class, 'registrasi']);

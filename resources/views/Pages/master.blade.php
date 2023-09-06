@@ -11,8 +11,11 @@
     <link rel="stylesheet" href=" {{ asset('src/bootstrap/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('src/plugins/select2/select2.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href=" {{ asset('src/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -31,10 +34,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href=" {{ asset('src/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('src/plugins/select2/select2.min.css') }}">
-
-
-
 </head>
 
 <body class="hold-transition skin-purple-light sidebar-mini">
@@ -613,15 +612,19 @@
     <!-- ./wrapper -->
     <!-- jQuery 2.2.0 -->
     <script src="{{ asset('src/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    {{-- <script src="{{ asset('src/dist/js/jquery.min.js') }}"></script> --}}
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('src/dist/js/jquery.min.js') }}"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    {{-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> --}}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <!-- Bootstrap 3.3.6 -->
     <script src="{{ asset('src/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('src/plugins/select2/select2.full.min.js') }}"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="{{ asset('src/plugins/morris/morris.min.js') }}"></script>
@@ -640,7 +643,7 @@
     <!-- datepicker -->
     <script src="{{ asset('src/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="{{ asset('src/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    {{-- <script src="{{ asset('src/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script> --}}
     <!-- Slimscroll -->
     <script src="{{ asset('src/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
@@ -649,7 +652,6 @@
     <script src="{{ asset('src/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('src/dist/js/pages/dashboard.js') }}"></script>
-    <script src="{{ asset('src/plugins/select2/select2.full.min.js') }}"></script>
     <script>
         $(function() {
             $("#table1").DataTable();
@@ -663,80 +665,34 @@
             });
         });
     </script>
-    <script>
+    {{-- <script>
         $(function() {
             //Initialize Select2 Elements
-            $(".select2").select2();
+            $(".form-control-pasien").select2();
+        });
+    </script> --}}
 
-            //Datemask dd/mm/yyyy
-            $("#datemask").inputmask("dd/mm/yyyy", {
-                "placeholder": "dd/mm/yyyy"
-            });
-            //Datemask2 mm/dd/yyyy
-            $("#datemask2").inputmask("mm/dd/yyyy", {
-                "placeholder": "mm/dd/yyyy"
-            });
-            //Money Euro
-            $("[data-mask]").inputmask();
+    <script type="text/javascript">
+        var path = "{{ route('registrasiSearch') }}";
 
-            //Date range picker
-            $('#reservation').daterangepicker();
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                format: 'MM/DD/YYYY h:mm A'
-            });
-            //Date range as a button
-            $('#daterange-btn').daterangepicker({
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
-                            'month').endOf('month')]
-                    },
-                    startDate: moment().subtract(29, 'days'),
-                    endDate: moment()
+        $('#search').select2({
+            placeholder: 'Nama Pasien / no.MR',
+            ajax: {
+                url: path,
+                dataType: 'json',
+                delay: 250,
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.fs_mr + ' - ' + item.fs_nama,
+                                id: item.fs_mr
+                            }
+                        })
+                    };
                 },
-                function(start, end) {
-                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format(
-                        'MMMM D, YYYY'));
-                }
-            );
-
-            //Date picker
-            $('#datepicker').datepicker({
-                autoclose: true
-            });
-
-            //iCheck for checkbox and radio inputs
-            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                checkboxClass: 'icheckbox_minimal-blue',
-                radioClass: 'iradio_minimal-blue'
-            });
-            //Red color scheme for iCheck
-            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-                checkboxClass: 'icheckbox_minimal-red',
-                radioClass: 'iradio_minimal-red'
-            });
-            //Flat red color scheme for iCheck
-            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
-            });
-
-            //Colorpicker
-            $(".my-colorpicker1").colorpicker();
-            //color picker with addon
-            $(".my-colorpicker2").colorpicker();
-
-            //Timepicker
-            $(".timepicker").timepicker({
-                showInputs: false
-            });
+                cache: true
+            }
         });
     </script>
 </body>
