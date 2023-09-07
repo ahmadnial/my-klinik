@@ -675,11 +675,12 @@
                 url: path,
                 dataType: 'json',
                 delay: 150,
-                processResults: function(data) {
+                processResults: function(isdata) {
                     return {
-                        results: $.map(data, function(item) {
+                        results: $.map(isdata, function(item) {
                             return {
-                                text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
+                                text: item.fs_nama,
+                                // text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
                                 id: item.fs_mr
                             }
                         })
@@ -688,6 +689,26 @@
                 cache: true
             }
         });
+
+        var ur = "{{ route('getDasos') }}";
+
+        function getData() {
+            var search = $('#search').val();
+            // var search = $('#search').find(':selected');
+
+            $.ajax({
+                url: ur,
+                // dataType: 'json',
+                data: 'search' + search,
+                success: function(isdata2) {
+                    var json = isdata2,
+                        obj = JSON.stringify(json);
+                    console.log(obj);
+                    // $("#fr_alamat").val(obj.fs_alamat);
+                },
+            });
+
+        };
     </script>
 </body>
 

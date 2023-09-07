@@ -46,22 +46,30 @@ class HomeController extends Controller
 
     public function registrasiSearch(Request $request)
     {
-        $data = [];
+        $isdata = [];
 
         if ($request->filled('q')) {
-            $data = dataSosialCreate::select("fs_mr", "fs_nama", "fs_alamat", "fs_tgl_lahir")
+            $isdata = dataSosialCreate::select("fs_mr", "fs_nama", "fs_alamat", "fs_tgl_lahir")
                 ->where('fs_nama', 'LIKE', '%' . $request->get('q') . '%')
                 ->get();
         }
         // dd($data);
 
-        return response()->json($data);
+        return response()->json($isdata);
+    }
 
+    public function getDasos(Request $request)
+    {
+        $isdata2 = [];
 
-        // $getPasien = dataSosialCreate::all();
-        // return view('Pages.registrasi', [
-        //     'pasien' => $getPasien
-        // ]);
+        $request->filled('q');
+        $isdata2 = dataSosialCreate::select("fs_mr", "fs_nama", "fs_alamat", "fs_tgl_lahir")
+            ->where('fs_nama', $request->get('q'))
+            ->get();
+
+        // dd($data);
+
+        return response()->json($isdata2);
     }
 
     public function antrian()
