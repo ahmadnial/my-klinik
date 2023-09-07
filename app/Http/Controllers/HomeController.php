@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\dataSosialCreate;
+use App\Models\registrasiCreate;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,16 @@ class HomeController extends Controller
 
     public function registrasi()
     {
-        return view('Pages.registrasi');
+        $cekreg = registrasiCreate::count();
+        if ($cekreg == 0) {
+            $kd_reg = 'RG' . '-' . 100001;
+        } else {
+            $continue = registrasiCreate::all()->last();
+            $temp = 'RG' . '-' . (int)substr($continue->fr_kd_reg, -6) + 1;
+            $kd_reg = $temp;
+        }
+
+        return view('Pages.registrasi', ['kd_reg' => $kd_reg]);
     }
 
 

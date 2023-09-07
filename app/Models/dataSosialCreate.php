@@ -17,6 +17,7 @@ class dataSosialCreate extends Model
         'fs_tgl_lahir',
         'fs_jenis_kelamin',
         'fs_alamat',
-        'fs_no_hp'
+        'fs_no_hp',
+        'fs_user'
     ];
 }

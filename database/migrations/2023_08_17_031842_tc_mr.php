@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('fs_jenis_kelamin');
             $table->string('fs_alamat');
             $table->string('fs_no_hp');
+            $table->string('fs_user')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
