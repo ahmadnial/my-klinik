@@ -58,8 +58,8 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="">Nama Pasien/No. MR</label>
-                        <select class="form-control-pasien" id="search" style="width: 100%;"
-                            name="fr_nm_pasien"></select>
+                        <select class="form-control-pasien" id="search" style="width: 100%;" name="fr_nm_pasien"
+                            onchange="getData()"></select>
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="">Tanggal Lahir</label>
@@ -104,7 +104,8 @@
                     </div>
                     <div class="form-group col-sm-12">
                         <label for="">Alergi</label>
-                        <input type="text" class="form-control" name="fr_alergi" placeholder="Nomor Telephone/WA Pasien">
+                        <input type="text" class="form-control" name="fr_alergi" id="fr_alamat"
+                            placeholder="Nomor Telephone/WA Pasien">
                     </div>
                     <div class="form-group col-sm-12">
                         <label for="">Alamat</label>
@@ -112,7 +113,8 @@
                     </div>
                     <div class="form-group col-sm-12">
                         <label for="">Nomor Telephone</label>
-                        <input type="text" class="form-control" name="fr_no_tlp" placeholder="Nomor Telephone/WA Pasien">
+                        <input type="text" class="form-control" name="fr_no_tlp"
+                            placeholder="Nomor Telephone/WA Pasien">
                     </div>
                 </div>
                 <div class="modal-footer">

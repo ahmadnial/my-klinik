@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Klinik Asla | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -679,10 +680,12 @@
                     return {
                         results: $.map(isdata, function(item) {
                             return {
-                                text: item.fs_nama,
-                                // text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
-                                id: item.fs_mr
+                                // text: item.fs_mr,
+                                text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
+                                id: item.fs_mr,
+                                alamat: item.fs_alamat,
                             }
+                            $("#fr_alamat").val(item.fs_alamat)
                         })
                     };
                 },
@@ -690,25 +693,41 @@
             }
         });
 
-        var ur = "{{ route('getDasos') }}";
-
         function getData() {
-            var search = $('#search').val();
-            // var search = $('#search').find(':selected');
-
+            // alert($('#search').val());
+            var id = $('#search').val();
             $.ajax({
-                url: ur,
-                // dataType: 'json',
-                data: 'search' + search,
-                success: function(isdata2) {
-                    var json = isdata2,
-                        obj = JSON.stringify(json);
-                    console.log(obj);
-                    // $("#fr_alamat").val(obj.fs_alamat);
+                url: "{{ url('getDasos') }}" + '/' + id,
+                data: {
+                    'id': id
                 },
-            });
-
+                success: function(isdata2) {
+                    var json = isdata2;
+                    // obj = JSON.stringify(json);
+                    // alert(isdata2),
+                    // console.log(obj);
+                    $("#fr_alamat").val(isdata2.fs_alamat);
+                }
+            })
         };
+
+        // function getData() {
+        //     var search = $('#search').val();
+        //     // var search = $('#search').find(':selected');
+
+        //     $.ajax({
+        //         url: ur,
+        //         // dataType: 'json',
+        //         data: 'search' + search,
+        //         success: function(isdata2) {
+        //             var json = isdata2,
+        //                 obj = JSON.stringify(json);
+        //             console.log(obj);
+        //             // $("#fr_alamat").val(obj.fs_alamat);
+        //         },
+        //     });
+
+        // };
     </script>
 </body>
 

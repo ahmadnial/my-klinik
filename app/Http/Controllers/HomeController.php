@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dataSosialCreate;
 use App\Models\registrasiCreate;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -58,16 +59,12 @@ class HomeController extends Controller
         return response()->json($isdata);
     }
 
-    public function getDasos(Request $request)
+    public function getDasos(request $id)
     {
-        $isdata2 = [];
+        $true = $id;
+        $isdata2 = DB::table('tc_mr')->where('fs_mr', $true)->get();
 
-        $request->filled('q');
-        $isdata2 = dataSosialCreate::select("fs_mr", "fs_nama", "fs_alamat", "fs_tgl_lahir")
-            ->where('fs_nama', $request->get('q'))
-            ->get();
-
-        // dd($data);
+        // dd($isdata2);
 
         return response()->json($isdata2);
     }
