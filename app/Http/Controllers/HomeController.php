@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         $cekreg = registrasiCreate::count();
         if ($cekreg == 0) {
-            $kd_reg = 'RG' . '-' . 100001;
+            $kd_reg = 'RG' . 100001;
         } else {
             $continue = registrasiCreate::all()->last();
             $temp = 'RG' . '-' . (int)substr($continue->fr_kd_reg, -6) + 1;
