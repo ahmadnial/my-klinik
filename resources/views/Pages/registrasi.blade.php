@@ -156,42 +156,25 @@
         });
 
         function getData() {
-            // alert($('#search').val());
             var fs_mr = $('#search').val();
             $.ajax({
-                url: "{{ url('getDasos') }}" + '/' + fs_mr,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ url('getDasos') }}/" + fs_mr,
                 type: 'GET',
                 data: {
-                    fs_mr: fs_mr
+                    'fs_mr': fs_mr
                 },
-
                 success: function(isdata2) {
                     var json = isdata2;
                     obj = JSON.stringify(json);
-                    // alert(json.fs_alamat),
+                    // alert(obj.fs_alamat),
                     // const tz = 'fs_alamat';
-                    // console.log(obj[tz]);
-                    $("#fr_alamat").val(obj);
+                    console.log(obj);
+                    $("#fr_alamat").val(obj.fs_alamat);
                 }
             })
         };
-
-        // function getData() {
-        //     var search = $('#search').val();
-        //     // var search = $('#search').find(':selected');
-
-        //     $.ajax({
-        //         url: ur,
-        //         // dataType: 'json',
-        //         data: 'search' + search,
-        //         success: function(isdata2) {
-        //             var json = isdata2,
-        //                 obj = JSON.stringify(json);
-        //             console.log(obj);
-        //             // $("#fr_alamat").val(obj.fs_alamat);
-        //         },
-        //     });
-
-        // };
     </script>
 @endpush
