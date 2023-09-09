@@ -161,7 +161,9 @@
             $.ajax({
                 url: "{{ url('getDasos') }}" + '/' + fs_mr,
                 type: 'GET',
-                data: fs_mr,
+                data: {
+                    fs_mr: fs_mr
+                },
 
                 success: function(isdata2) {
                     var json = isdata2;
