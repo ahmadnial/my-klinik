@@ -109,7 +109,7 @@
                     </div>
                     <div class="form-group col-sm-12">
                         <label for="">Alamat</label>
-                        <textarea type="date" class="form-control" name="fr_alamat">Alamat Lengkap Pasien</textarea>
+                        <textarea type="date" class="form-control" name="">Alamat Lengkap Pasien</textarea>
                     </div>
                     <div class="form-group col-sm-12">
                         <label for="">Nomor Telephone</label>
@@ -127,3 +127,69 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        // Ajax Search Registrasi
+        var path = "{{ route('registrasiSearch') }}";
+
+        $('#search').select2({
+            placeholder: 'Nama Pasien / no.MR',
+            ajax: {
+                url: path,
+                dataType: 'json',
+                delay: 150,
+                processResults: function(isdata) {
+                    return {
+                        results: $.map(isdata, function(item) {
+                            return {
+                                // text: item.fs_mr,
+                                text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
+                                id: item.fs_mr,
+                                alamat: item.fs_alamat,
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        function getData() {
+            // alert($('#search').val());
+            var fs_mr = $('#search').val();
+            $.ajax({
+                url: "{{ url('getDasos') }}" + '/' + fs_mr,
+                type: 'GET',
+                data: fs_mr,
+
+                success: function(isdata2) {
+                    var json = isdata2;
+                    obj = JSON.stringify(json);
+                    // alert(json.fs_alamat),
+                    // const tz = 'fs_alamat';
+                    // console.log(obj[tz]);
+                    $("#fr_alamat").val(obj);
+                }
+            })
+        };
+
+        // function getData() {
+        //     var search = $('#search').val();
+        //     // var search = $('#search').find(':selected');
+
+        //     $.ajax({
+        //         url: ur,
+        //         // dataType: 'json',
+        //         data: 'search' + search,
+        //         success: function(isdata2) {
+        //             var json = isdata2,
+        //                 obj = JSON.stringify(json);
+        //             console.log(obj);
+        //             // $("#fr_alamat").val(obj.fs_alamat);
+        //         },
+        //     });
+
+        // };
+    </script>
+@endpush

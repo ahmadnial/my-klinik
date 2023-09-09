@@ -36,6 +36,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href=" {{ asset('src/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
+
 </head>
 
 <body class="hold-transition skin-purple-light sidebar-mini">
@@ -605,9 +606,6 @@
                 <!-- /.tab-pane -->
             </div>
         </aside>
-        <!-- /.control-sidebar -->
-        <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
 
     </div>
@@ -616,43 +614,30 @@
     <script src="{{ asset('src/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     {{-- <script src="{{ asset('src/dist/js/jquery.min.js') }}"></script> --}}
-    <!-- jQuery UI 1.11.4 -->
-    {{-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> --}}
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <!-- Bootstrap 3.3.6 -->
     <script src="{{ asset('src/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    {{-- 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
         integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script src="{{ asset('src/plugins/select2/select2.full.min.js') }}"></script>
-    <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="{{ asset('src/plugins/morris/morris.min.js') }}"></script>
-    <!-- Sparkline -->
     <script src="{{ asset('src/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css"></script>
     <script src="{{ asset('src/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <!-- jvectormap -->
     <script src="{{ asset('src/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
     <script src="{{ asset('src/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-    <!-- jQuery Knob Chart -->
     <script src="{{ asset('src/plugins/knob/jquery.knob.js') }}"></script>
-    <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <!-- datepicker -->
     <script src="{{ asset('src/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     <!-- Bootstrap WYSIHTML5 -->
     {{-- <script src="{{ asset('src/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script> --}}
     <!-- Slimscroll -->
     <script src="{{ asset('src/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
     <script src="{{ asset('src/plugins/fastclick/fastclick.js') }}"></script>
-    <!-- AdminLTE App -->
     <script src="{{ asset('src/dist/js/app.min.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('src/dist/js/pages/dashboard.js') }}"></script>
     <script>
         $(function() {
@@ -666,69 +651,9 @@
                 "autoWidth": false
             });
         });
-
-        // Ajax Search Registrasi
-        var path = "{{ route('registrasiSearch') }}";
-
-        $('#search').select2({
-            placeholder: 'Nama Pasien / no.MR',
-            ajax: {
-                url: path,
-                dataType: 'json',
-                delay: 150,
-                processResults: function(isdata) {
-                    return {
-                        results: $.map(isdata, function(item) {
-                            return {
-                                // text: item.fs_mr,
-                                text: item.fs_mr + ' - ' + item.fs_nama + ' - ' + item.fs_tgl_lahir,
-                                id: item.fs_mr,
-                                alamat: item.fs_alamat,
-                            }
-                            $("#fr_alamat").val(item.fs_alamat)
-                        })
-                    };
-                },
-                cache: true
-            }
-        });
-
-        function getData() {
-            // alert($('#search').val());
-            var id = $('#search').val();
-            $.ajax({
-                url: "{{ url('getDasos') }}" + '/' + id,
-                data: {
-                    'id': id
-                },
-                success: function(isdata2) {
-                    var json = isdata2;
-                    // obj = JSON.stringify(json);
-                    // alert(isdata2),
-                    // console.log(obj);
-                    $("#fr_alamat").val(isdata2.fs_alamat);
-                }
-            })
-        };
-
-        // function getData() {
-        //     var search = $('#search').val();
-        //     // var search = $('#search').find(':selected');
-
-        //     $.ajax({
-        //         url: ur,
-        //         // dataType: 'json',
-        //         data: 'search' + search,
-        //         success: function(isdata2) {
-        //             var json = isdata2,
-        //                 obj = JSON.stringify(json);
-        //             console.log(obj);
-        //             // $("#fr_alamat").val(obj.fs_alamat);
-        //         },
-        //     });
-
-        // };
     </script>
+    @stack('scripts')
+
 </body>
 
 </html>

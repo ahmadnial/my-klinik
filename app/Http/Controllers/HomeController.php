@@ -59,13 +59,14 @@ class HomeController extends Controller
         return response()->json($isdata);
     }
 
-    public function getDasos(request $id)
+    public function getDasos(request $fs_mr)
     {
-        $true = $id;
-        $isdata2 = DB::table('tc_mr')->where('fs_mr', $true)->get();
+        $true = '100013';
+        $isdata2 = dataSosialCreate::where('fs_mr', $fs_mr)->get();
 
         // dd($isdata2);
 
+        // return view('Pages.registrasi', ['isdata' => $isdata2]);
         return response()->json($isdata2);
     }
 

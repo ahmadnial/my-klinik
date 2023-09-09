@@ -26,7 +26,7 @@ Route::get('/antrian', [HomeController::class, 'antrian']);
 Route::controller(HomeController::class)->group(function () {
     Route::get('registrasi', 'registrasi');
     Route::get('registrasiSearch', 'registrasiSearch')->name('registrasiSearch');
-    Route::get('getDasos/{id}', 'getDasos')->name('getDasos');
+    Route::get('getDasos/{fs_mr}', 'getDasos')->name('getDasos');
 });
 
 Route::post('/create-dasos', [registrasiController::class, 'store']);
